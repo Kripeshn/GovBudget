@@ -16,10 +16,10 @@ function Dashboard() {
         const token = localStorage.getItem("token");
 
         const [budgetsRes, expensesRes] = await Promise.all([
-          fetch(`${ APIUrl }/admin/get-budgets`, {
+          fetch("https://govbudget.onrender.com/admin/get-budgets", {
             headers: { Authorization: `Bearer ${token}` }
           }),
-          fetch(`${ APIUrl }/admin/get-expenses`, {
+          fetch("https://govbudget.onrender.com/admin/get-expenses", {
             headers: { Authorization: `Bearer ${token}` }
           })
         ]);
@@ -48,10 +48,10 @@ function Dashboard() {
     fetchData();
   }, []);
 
-  // ✅ Robust function to calculate total expenses for a budget
+  
   const getTotalExpensesForBudget = (budgetId) => {
     const budgetExpenses = expenses.filter(exp => {
-      // Handles both populated object and plain string ID
+    
       if (!exp.budget) return false;
       if (typeof exp.budget === 'string') return exp.budget === budgetId;
       return exp.budget._id === budgetId;
