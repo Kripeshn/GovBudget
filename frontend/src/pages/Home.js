@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 // import Sidebar from '../components/Sidebar';
 import UserSidebar from '../components/UserSidebar';
+import { APIUrl } from '../utils';
 
 function Dashboard() {
   const [totalBudget, setTotalBudget] = useState(0);
@@ -15,10 +16,10 @@ function Dashboard() {
         const token = localStorage.getItem("token");
 
         const [budgetsRes, expensesRes] = await Promise.all([
-          fetch("http://localhost:8080/admin/get-budgets", {
+          fetch(`${ APIUrl }/admin/get-budgets`, {
             headers: { Authorization: `Bearer ${token}` }
           }),
-          fetch("http://localhost:8080/admin/get-expenses", {
+          fetch(`${ APIUrl }/admin/get-expenses`, {
             headers: { Authorization: `Bearer ${token}` }
           })
         ]);
