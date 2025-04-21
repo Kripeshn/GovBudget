@@ -14,10 +14,10 @@ function Dashboard() {
         const token = localStorage.getItem("token");
 
         const [budgetsRes, expensesRes] = await Promise.all([
-          fetch("http://localhost:8080/admin/get-budgets", {
+          fetch(`${APIUrl}/admin/get-budgets`, {
             headers: { Authorization: `Bearer ${token}` }
           }),
-          fetch("http://localhost:8080/admin/get-expenses", {
+          fetch(`${APIUrl}/admin/get-expenses`, {
             headers: { Authorization: `Bearer ${token}` }
           })
         ]);
@@ -50,7 +50,7 @@ function Dashboard() {
   const fetchFeedbacks = async () => {
     try {
       const token = localStorage.getItem("token");
-      const feedbacksRes = await fetch("http://localhost:8080/user/get-feedbacks", {
+      const feedbacksRes = await fetch(`${APIUrl}/user/get-feedbacks`, {
         headers: { Authorization: `Bearer ${token}` }
       });
   
@@ -75,7 +75,7 @@ function Dashboard() {
   const handleDeleteFeedback = async (feedbackId) => {
     try {
       const token = localStorage.getItem("token");
-      const response = await fetch(`http://localhost:8080/user/feedback/${feedbackId}`, {
+      const response = await fetch(`${APIUrl}/user/feedback/${feedbackId}`, {
         method: 'DELETE',
         headers: {
           Authorization: `Bearer ${token}`,
