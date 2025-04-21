@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import axios from 'axios';
-import { handleError, handleSuccess } from '../utils';
+import { APIUrl, handleError, handleSuccess } from '../utils';
 import UserSidebar from '../components/UserSidebar';
 import { ToastContainer } from 'react-toastify';
 
@@ -23,18 +23,18 @@ function Feedback() {
 
     try {
       const { data } = await axios.post(
-        "http://localhost:8080/user/feedback", // Replace with your backend URL
-        { message: feedback }, // Send the feedback data
+       ` ${APIUrl}/user/feedback`, 
+        { message: feedback }, 
         {
           headers: {
-            Authorization: `Bearer ${localStorage.getItem('token')}`, // Fetch token from localStorage
+            Authorization: `Bearer ${localStorage.getItem('token')}`, 
           },
         }
       );
 
       if (data?.success) {
         handleSuccess('Feedback submitted successfully');
-        setFeedback(''); // Reset feedback input field
+        setFeedback('');
       } else {
         handleError(data.message || 'Failed to submit feedback');
       }
@@ -49,7 +49,7 @@ function Feedback() {
       <div className="flex-1 bg-gray-100 p-10">
         <h1 className="text-3xl font-semibold mb-6">Submit Feedback</h1>
 
-        {/* Feedback Form */}
+       
         <form onSubmit={handleSubmitFeedback} className="bg-white shadow-md rounded-lg p-6">
           <div className="mb-4">
             <label className="block text-lg font-semibold" htmlFor="feedback">
@@ -65,9 +65,9 @@ function Feedback() {
             />
           </div>
 
-          {/* Error and Success Messages */}
+         
           <div className="mt-4">
-            {/* Optionally display success or error message */}
+            
           </div>
 
           <div className="mt-6 flex justify-end">
