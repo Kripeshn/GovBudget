@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import Sidebar from '../../components/Sidebar';
-import { handleError, handleSuccess } from '../../utils';
+import {APIUrl, handleError, handleSuccess } from '../../utils';
 
 function Dashboard() {
   const [totalBudget, setTotalBudget] = useState(0);
