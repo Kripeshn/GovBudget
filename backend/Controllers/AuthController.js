@@ -17,7 +17,8 @@ const signup = async (req, res) => {
         res.status(201)
             .json({
                 message: "Signup successfully",
-                success: true
+                success: true,
+                
             })
     } catch (err) {
         res.status(500)
@@ -31,7 +32,7 @@ const signup = async (req, res) => {
 
 const login = async (req, res) => {
     try {
-        const { email, password } = req.body;
+        const { email, password, role } = req.body;
         const user = await UserModel.findOne({ email });
         const errorMsg = 'Auth failed email or password is wrong';
         if (!user) {
@@ -44,8 +45,9 @@ const login = async (req, res) => {
                 .json({ message: errorMsg, success: false });
         }
         const jwtToken = jwt.sign(
-            { email: user.email, _id: user._id },
+            { email: user.email, _id: user._id, role: user.role },
             process.env.JWT_SECRET,
+
             { expiresIn: '24h' }
         )
 
@@ -53,8 +55,9 @@ const login = async (req, res) => {
             .json({
                 message: "Login Success",
                 success: true,
-                jwtToken,
+                jwtToken: jwtToken,
                 email,
+                role: user.role,
                 name: user.name
             })
     } catch (err) {

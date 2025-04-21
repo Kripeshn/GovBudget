@@ -2,6 +2,8 @@ import React, { useState } from 'react'
 import { Link, useNavigate } from 'react-router-dom'
 import { ToastContainer } from 'react-toastify';
 import { APIUrl, handleError, handleSuccess } from '../utils';
+import './Login.css'
+
 
 function Signup() {
 
@@ -54,6 +56,8 @@ function Signup() {
         }
     }
     return (
+        <div className='login'>
+
         <div className='container'>
             <h1>Signup</h1>
             <form onSubmit={handleSignup}>
@@ -66,7 +70,7 @@ function Signup() {
                         autoFocus
                         placeholder='Enter your name...'
                         value={signupInfo.name}
-                    />
+                        />
                 </div>
                 <div>
                     <label htmlFor='email'>Email</label>
@@ -76,7 +80,7 @@ function Signup() {
                         name='email'
                         placeholder='Enter your email...'
                         value={signupInfo.email}
-                    />
+                        />
                 </div>
                 <div>
                     <label htmlFor='password'>Password</label>
@@ -86,7 +90,7 @@ function Signup() {
                         name='password'
                         placeholder='Enter your password...'
                         value={signupInfo.password}
-                    />
+                        />
                 </div>
                 <button type='submit'>Signup</button>
                 <span>Already have an account ?
@@ -95,6 +99,7 @@ function Signup() {
             </form>
             <ToastContainer />
         </div>
+     </div>
     )
 }
 

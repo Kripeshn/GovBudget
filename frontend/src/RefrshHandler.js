@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react'
+import { useEffect } from 'react'
 import { useLocation, useNavigate } from 'react-router-dom'
 
 function RefrshHandler({ setIsAuthenticated }) {
@@ -6,20 +6,27 @@ function RefrshHandler({ setIsAuthenticated }) {
     const navigate = useNavigate();
 
     useEffect(() => {
-        if (localStorage.getItem('token')) {
+        const token = localStorage.getItem('token');
+        const role = localStorage.getItem('role'); // "0" or "1"
+
+        if (token) {
             setIsAuthenticated(true);
-            if (location.pathname === '/' ||
+
+            if (
+                location.pathname === '/' ||
                 location.pathname === '/login' ||
                 location.pathname === '/signup'
             ) {
-                navigate('/home', { replace: false });
+                if (role === "1") {
+                    navigate('/dashboard', { replace: true });
+                } else {
+                    navigate('/home', { replace: true });
+                }
             }
         }
-    }, [location, navigate, setIsAuthenticated])
+    }, [location, navigate, setIsAuthenticated]);
 
-    return (
-        null
-    )
+    return null;
 }
 
-export default RefrshHandler
+export default RefrshHandler;
